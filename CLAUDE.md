@@ -6,7 +6,8 @@ Sito statico di prova pubblicato con **GitHub Pages**.
 - Sito pubblico: https://ingegnererecca-web.github.io/sito-test/
 
 ## Struttura
-- `index.html` — unica pagina del sito (HTML + CSS + JS inline, nessuna dipendenza esterna)
+- `index.html` — pagina di prova principale (HTML + CSS + JS inline, nessuna dipendenza esterna)
+- `galleria/index.html` — esempio di sito per una galleria d'arte immaginaria ("Galleria Meridiana"); opere disegnate in CSS, nessuna immagine esterna. URL: https://ingegnererecca-web.github.io/sito-test/galleria/
 - `README.md` — descrizione breve
 - `CLAUDE.md` — questo file: contesto condiviso per sincronizzarsi sul progetto
 
@@ -22,3 +23,4 @@ Sito statico di prova pubblicato con **GitHub Pages**.
 
 ## Registro modifiche
 - 2026-11-16 — Creata la repository e pubblicata la pagina di prova.
+- 2026-11-16 — Aggiunto l'esempio di galleria d'arte in `galleria/`.

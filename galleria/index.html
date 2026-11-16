@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Galleria Meridiana — Arte contemporanea</title>
+<style>
+  :root{--bg:#f4f1ea;--ink:#16161a;--muted:#6b6862;--line:#d9d3c7;--accent:#a3472b;}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:Georgia,"Times New Roman",serif;line-height:1.6}
+  a{color:inherit}
+  nav{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:16px 5vw;background:rgba(244,241,234,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+  .logo{font-size:1.15rem;letter-spacing:4px;text-transform:uppercase}
+  nav ul{list-style:none;display:flex;gap:28px;margin:0;padding:0;font-size:.9rem}
+  nav a{text-decoration:none}
+  nav a:hover{color:var(--accent)}
+  .hero{display:grid;grid-template-columns:1.1fr 1fr;min-height:82vh;border-bottom:1px solid var(--line)}
+  .hero-text{padding:10vh 5vw;display:flex;flex-direction:column;justify-content:center}
+  .tag{font-family:Arial,sans-serif;font-size:.72rem;letter-spacing:3px;text-transform:uppercase;color:var(--accent)}
+  .hero h1{font-size:clamp(2.4rem,5.5vw,4.6rem);line-height:1.05;margin:14px 0 18px;font-weight:normal}
+  .hero h1 em{color:var(--accent)}
+  .hero p{color:var(--muted);max-width:440px}
+  .btn{display:inline-block;margin-top:22px;padding:12px 26px;border:1px solid var(--ink);text-decoration:none;font-family:Arial,sans-serif;font-size:.8rem;letter-spacing:2px;text-transform:uppercase;transition:.25s}
+  .btn:hover{background:var(--ink);color:var(--bg)}
+  .hero-art{background:radial-gradient(circle at 30% 35%,#e9b44c 0 18%,transparent 19%),radial-gradient(circle at 68% 62%,#a3472b 0 26%,transparent 27%),linear-gradient(160deg,#1f3a4d,#0f1c26)}
+  section{padding:90px 5vw;border-bottom:1px solid var(--line)}
+  h2{font-weight:normal;font-size:2.1rem;margin:8px 0 36px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:34px}
+  .opera{cursor:pointer}
+  .tela{aspect-ratio:4/5;border:10px solid #fff;box-shadow:0 8px 24px rgba(0,0,0,.12);transition:transform .3s}
+  .opera:hover .tela{transform:translateY(-6px)}
+  .opera h3{margin:14px 0 2px;font-weight:normal;font-style:italic}
+  .opera p{margin:0;color:var(--muted);font-size:.88rem}
+  .a1{background:linear-gradient(90deg,#e4d7bd 0 33%,#c8553d 33% 66%,#2d3047 66%)}
+  .a2{background:radial-gradient(circle at 50% 45%,#f2c14e 0 22%,#f78154 23% 40%,#4d9078 41%)}
+  .a3{background:repeating-linear-gradient(45deg,#1b263b 0 18px,#e0e1dd 18px 36px)}
+  .a4{background:linear-gradient(#87a8a4 0 55%,#d9cb9e 55% 70%,#374140 70%)}
+  .a5{background:conic-gradient(from 30deg at 40% 60%,#a3472b,#e9b44c,#1f3a4d,#a3472b)}
+  .a6{background:radial-gradient(ellipse at 30% 70%,#fff 0 12%,transparent 13%),radial-gradient(ellipse at 70% 30%,#16161a 0 20%,transparent 21%),#d8c3a5}
+  .a7{background:linear-gradient(180deg,#0b132b,#3a506b 60%,#f4a261 60% 63%,#1c2541 63%)}
+  .a8{background:repeating-radial-gradient(circle at 50% 50%,#e76f51 0 10px,#f4f1ea 10px 20px)}
+  .mostra{display:grid;grid-template-columns:1fr 1fr;gap:6vw;align-items:center}
+  .mostra .tela{border-width:14px}
+  .date{font-family:Arial,sans-serif;font-size:.85rem;letter-spacing:1px;color:var(--accent);margin-bottom:10px}
+  .artisti{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:30px}
+  .artista{border-top:1px solid var(--ink);padding-top:16px}
+  .artista h3{margin:0 0 4px;font-weight:normal;font-size:1.3rem}
+  .artista p{margin:0;color:var(--muted);font-size:.92rem}
+  .info{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:30px}
+  .info h3{font-family:Arial,sans-serif;font-size:.75rem;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+  .info p{margin:0}
+  form{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+  input{flex:1;min-width:180px;padding:10px;border:1px solid var(--line);background:#fff;font:inherit}
+  button{padding:10px 18px;border:0;background:var(--ink);color:var(--bg);font:inherit;cursor:pointer}
+  #msg{color:var(--accent);font-size:.9rem;margin-top:8px}
+  footer{padding:30px 5vw;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:.8rem;color:var(--muted)}
+  .lightbox{position:fixed;inset:0;background:rgba(10,10,12,.92);display:none;align-items:center;justify-content:center;z-index:50;padding:5vw}
+  .lightbox.on{display:flex}
+  .lb-box{display:grid;grid-template-columns:minmax(220px,380px) 1fr;gap:40px;align-items:center;color:#eee;max-width:900px}
+  .lb-box .tela{border-color:#f4f1ea}
+  .lb-box h3{font-weight:normal;font-style:italic;font-size:1.8rem;margin:0 0 6px}
+  .lb-box p{color:#bbb;margin:4px 0}
+  .chiudi{position:absolute;top:20px;right:30px;font-size:2rem;color:#fff;background:none;cursor:pointer}
+  @media(max-width:760px){
+    .hero,.mostra,.lb-box{grid-template-columns:1fr}
+    .hero-art{min-height:40vh}
+    nav ul{gap:14px;font-size:.8rem}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Meridiana</div>
+  <ul>
+    <li><a href="#mostra">Mostra</a></li>
+    <li><a href="#opere">Opere</a></li>
+    <li><a href="#artisti">Artisti</a></li>
+    <li><a href="#visita">Visita</a></li>
+  </ul>
+</nav>
+
+<header class="hero">
+  <div class="hero-text">
+    <span class="tag">Galleria d'arte contemporanea</span>
+    <h1>La luce che <em>resta</em><br>dopo il tramonto</h1>
+    <p>Uno spazio dedicato alla pittura astratta e alla ricerca sul colore. Mostre, incontri con gli artisti e opere disponibili per collezionisti.</p>
+    <a class="btn" href="#opere">Scopri le opere</a>
+  </div>
+  <div class="hero-art" role="img" aria-label="Composizione astratta"></div>
+</header>
+
+<section id="mostra">
+  <div class="mostra">
+    <div class="tela a7" role="img" aria-label="Opera in mostra"></div>
+    <div>
+      <span class="tag">Mostra in corso</span>
+      <h2>Orizzonti minimi</h2>
+      <div class="date">12 novembre 2026 — 31 gennaio 2027</div>
+      <p>Sei artisti si confrontano con la linea dell'orizzonte come confine tra misura e immaginazione. Un percorso di ventiquattro opere tra pittura, incisione e installazione.</p>
+      <a class="btn" href="#visita">Orari e biglietti</a>
+    </div>
+  </div>
+</section>
+
+<section id="opere">
+  <span class="tag">Collezione</span>
+  <h2>Opere in esposizione</h2>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section id="artisti">
+  <span class="tag">Gli artisti</span>
+  <h2>Chi espone</h2>
+  <div class="artisti">
+    <div class="artista"><h3>Elena Varisco</h3><p>Pittrice. Lavora su campiture piatte e ritmi cromatici ispirati all'architettura mediterranea.</p></div>
+    <div class="artista"><h3>Tommaso Ferlito</h3><p>Incisore e pittore. Indaga la ripetizione e la geometria come linguaggio emotivo.</p></div>
+    <div class="artista"><h3>Giulia Arcuri</h3><p>Lavora con pigmenti naturali e cerchi concentrici, tra pittura e meditazione.</p></div>
+    <div class="artista"><h3>Marco Belluso</h3><p>Paesaggi ridotti all'essenziale: tre fasce, una linea, il silenzio.</p></div>
+  </div>
+</section>
+
+<section id="visita">
+  <span class="tag">Informazioni</span>
+  <h2>Visita la galleria</h2>
+  <div class="info">
+    <div><h3>Orari</h3><p>Martedì – Sabato<br>10:00 – 13:00 · 16:00 – 20:00<br>Domenica su appuntamento</p></div>
+    <div><h3>Ingresso</h3><p>Gratuito<br>Visite guidate su prenotazione</p></div>
+    <div><h3>Contatti</h3><p>Indirizzo, telefono ed email<br>sono di esempio: galleria immaginaria</p></div>
+    <div>
+      <h3>Newsletter</h3>
+      <p>Ricevi gli inviti alle inaugurazioni.</p>
+      <form id="nl">
+        <input type="email" placeholder="La tua email" required>
+        <button type="submit">Iscriviti</button>
+      </form>
+      <div id="msg"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Galleria Meridiana — sito dimostrativo, galleria e artisti immaginari</span>
+  <a href="../">← Torna al sito di test</a>
+</footer>
+
+<div class="lightbox" id="lb">
+  <button class="chiudi" id="chiudi" aria-label="Chiudi">×</button>
+  <div class="lb-box">
+    <div class="tela" id="lbTela"></div>
+    <div>
+      <h3 id="lbTitolo"></h3>
+      <p id="lbArtista"></p>
+      <p id="lbTecnica"></p>
+      <p id="lbDesc" style="margin-top:16px;color:#ddd"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+  var opere = [
+    {c:'a1',t:'Tre stagioni',a:'Elena Varisco',y:2024,k:'Acrilico su tela, 80×100 cm',d:'Tre campi di colore che scandiscono il passaggio dal giorno alla notte.'},
+    {c:'a2',t:'Nucleo',a:'Giulia Arcuri',y:2025,k:'Pigmenti naturali su lino, 70×90 cm',d:'Un centro luminoso che si espande in anelli di terra e vegetazione.'},
+    {c:'a3',t:'Diagonale n. 7',a:'Tommaso Ferlito',y:2023,k:'Olio su tavola, 60×75 cm',d:'Il ritmo regolare delle bande crea un movimento continuo dello sguardo.'},
+    {c:'a4',t:'Costa bassa',a:'Marco Belluso',y:2025,k:'Tempera su carta, 50×62 cm',d:'Cielo, sabbia e scogli ridotti a tre fasce orizzontali.'},
+    {c:'a5',t:'Rosa dei venti',a:'Elena Varisco',y:2026,k:'Acrilico su tela, 90×110 cm',d:'Una rotazione di colori caldi e freddi attorno a un punto decentrato.'},
+    {c:'a6',t:'Dialogo',a:'Tommaso Ferlito',y:2024,k:'Tecnica mista, 70×85 cm',d:'Due presenze, una chiara e una scura, sospese su un fondo ocra.'},
+    {c:'a7',t:'Ultima luce',a:'Marco Belluso',y:2026,k:'Olio su tela, 100×125 cm',d:'Opera simbolo della mostra: la linea d\'orizzonte come soglia.'},
+    {c:'a8',t:'Eco',a:'Giulia Arcuri',y:2025,k:'Pigmenti su tela, 80×80 cm',d:'Cerchi concentrici come onde sonore rese visibili.'}
+  ];
+  var grid = document.getElementById('grid');
+  opere.forEach(function(o){
+    var el = document.createElement('div');
+    el.className = 'opera';
+    el.innerHTML = '<div class="tela '+o.c+'"></div><h3>'+o.t+'</h3><p>'+o.a+', '+o.y+'</p>';
+    el.onclick = function(){ apri(o); };
+    grid.appendChild(el);
+  });
+  var lb = document.getElementById('lb');
+  function apri(o){
+    document.getElementById('lbTela').className = 'tela '+o.c;
+    document.getElementById('lbTitolo').textContent = o.t;
+    document.getElementById('lbArtista').textContent = o.a+', '+o.y;
+    document.getElementById('lbTecnica').textContent = o.k;
+    document.getElementById('lbDesc').textContent = o.d;
+    lb.classList.add('on');
+  }
+  document.getElementById('chiudi').onclick = function(){ lb.classList.remove('on'); };
+  lb.onclick = function(e){ if(e.target === lb) lb.classList.remove('on'); };
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') lb.classList.remove('on'); });
+  document.getElementById('nl').onsubmit = function(e){
+    e.preventDefault();
+    document.getElementById('msg').textContent = 'Grazie! (esempio: nessuna email viene inviata o salvata)';
+    this.reset();
+  };
+</script>
+</body>
+</html>
